@@ -18,14 +18,33 @@ function App() {
     setContacts([...contacts, remainingContacts[randomIndex] ])
   }
 
+  const sortByName = () =>{
+    const sortedArray =  [...contacts].sort((a, b) => a.name.localeCompare(b.name));
+
+    setContacts(sortedArray)
+  }
+
+  const sortByPopularity = () =>{
+    let sortedArray = [...contacts].sort((a, b) => b.popularity - a.popularity);
+    setContacts(sortedArray)
+  }
+
+  const deleteContact = id => {
+    const filteredContacts = contacts.filter(contact => {
+      return contact.id !== id 
+    } )
+    setContacts(filteredContacts)
+
+  }
+
 
 
   return (
     <div className="App">
       <h1>LAB | React IronContacts</h1>
       <button onClick={() => addRandomContact()} style={{marginBottom: "35px", marginRight: "15px"}}>Add Random Contact</button>
-      <button style={{marginBottom: "35px", marginRight: "15px"}}>Sort by popularity</button>
-      <button style={{marginBottom: "35px", marginRight: "15px"}}>Sort by name</button>
+      <button onClick={() => sortByPopularity()} style={{marginBottom: "35px", marginRight: "15px"}}>Sort by Popularity</button>
+      <button onClick={() => sortByName()} style={{marginBottom: "35px", marginRight: "15px"}}>Sort by Name</button>
       <table>
         <thead>
           <tr>
@@ -34,6 +53,7 @@ function App() {
             <th>Popularity</th>
             <th>Won an Oscar</th>
             <th>Won an Emmy</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -44,13 +64,14 @@ function App() {
                   <img
                     src={contact.pictureUrl}
                     alt="picture"
-                    style={{ width: "150px", height: "220px" }}
+                    
                   />
                 </td>
                 <td>{contact.name}</td>
                 <td>{Math.round(contact.popularity)}</td>
                 <td>{contact.wonOscar && <h2>🏆</h2>}</td>
                 <td>{contact.wonEmmy && <h2>🌟</h2>}</td>
+                <td><button onClick={()=> deleteContact(contact.id)}>Delete</button></td>
               </tr>
             );
           })}

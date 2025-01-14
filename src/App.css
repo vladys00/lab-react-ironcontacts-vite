@@ -40,3 +40,29 @@
 .read-the-docs {
   color: #888;
 }
+
+table{
+  border: 1px solid black;
+  padding: 10px;
+  border-radius: 4px;
+  thead{
+    background-color: aquamarine;
+    th{
+      padding: 15px;
+
+    }
+  }
+
+  tr{
+    border: 1px solid black;
+    td{
+      padding: 15px;
+    }
+  }
+  img{
+    border-radius: 50%;
+  width: 150px; /* Adjust the size */
+  height: 150px;
+  
+  }
+}
